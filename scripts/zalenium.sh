@@ -9,6 +9,7 @@ DESIRED_CONTAINERS=2
 MAX_DOCKER_SELENIUM_CONTAINERS=10
 SELENIUM_ARTIFACT="$(pwd)/selenium-server-standalone-${selenium-server.major-minor.version}.${selenium-server.patch-level.version}.jar"
 ZALENIUM_ARTIFACT="$(pwd)/${project.build.finalName}.jar"
+SIKULI_ARTIFACTS="$(pwd)/all-node-extensions.jar:$(pwd)/extension-proxy.jar"
 DEPRECATED_PARAMETERS=false
 SAUCE_LABS_ENABLED=false
 BROWSER_STACK_ENABLED=false
@@ -428,7 +429,7 @@ StartUp()
 
     java ${ZALENIUM_EXTRA_JVM_PARAMS} -Djava.util.logging.config.file=logging_${DEBUG_MODE}.properties \
     -Dlogback.configurationFile=logback.xml \
-    -cp ${SELENIUM_ARTIFACT}:${ZALENIUM_ARTIFACT} org.openqa.grid.selenium.GridLauncherV3 \
+    -cp ${SELENIUM_ARTIFACT}:${ZALENIUM_ARTIFACT}:${SIKULI_ARTIFACTS} org.openqa.grid.selenium.GridLauncherV3 \
     -role hub -port 4445 -servlet de.zalando.ep.zalenium.servlet.LivePreviewServlet \
     -servlet de.zalando.ep.zalenium.servlet.ZaleniumConsoleServlet \
     -servlet de.zalando.ep.zalenium.servlet.ZaleniumResourceServlet \
